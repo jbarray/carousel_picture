@@ -41,3 +41,10 @@ function buttonChange(){
     }
     buttons[index-1].className='on';
 }
+//图片自动播放
+function autoShow(){
+   setInterval(function () {
+         goToNext.onclick();
+    },1500);
+}
+autoShow();
