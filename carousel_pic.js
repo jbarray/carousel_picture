@@ -47,4 +47,17 @@ function autoShow(){
          goToNext.onclick();
     },1500);
 }
-autoShow();
+ autoShow();
+//点击某个圆点,跳转至相应的图片
+for(var i=0;i<buttons.length;i++){
+    (function (i) {
+        buttons[i].onclick=function(){
+            var clickIndex=parseInt(this.getAttribute('index'));
+            var offset=-600*(clickIndex-index);
+            animate(offset);
+            index=clickIndex;
+            buttonChange();
+            console.log(list.style.left);
+        };
+    })(i)
+}
