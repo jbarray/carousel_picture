@@ -4,6 +4,12 @@ var goToNext=document.getElementById('next');
 var goToPre=document.getElementById('prev');
 var buttons=document.getElementById('buttons').getElementsByTagName('span');
 var index=1;
+//为buttons添加属性index
+function addIndex(){
+    for(var j=0;j<buttons.length;j++){
+        buttons[j].setAttribute('index',j+'1');
+    }
+}
 //点击向左向右图标 图片切换
 function animate(offset) {
     var newLeft=parseInt(list.style.left)+offset;
@@ -17,6 +23,7 @@ function animate(offset) {
     list.style.left=newLeft+'px';
 }
 goToPre.onclick=function(){
+    addIndex();
     index -=1;
     if(index<1){
         index=5;
@@ -25,6 +32,7 @@ goToPre.onclick=function(){
     buttonChange();
 };
 goToNext.onclick=function(){
+    addIndex();
     index +=1;
     if(index>5){
         index=1;
@@ -34,6 +42,7 @@ goToNext.onclick=function(){
 };
 //五个圆点颜色的切换
 function buttonChange(){
+    addIndex();
     for(var i=0;i<buttons.length;i++){
         if(buttons[i].className==='on'){
             buttons[i].className=' ';
@@ -45,13 +54,14 @@ function buttonChange(){
 function autoShow(){
    setInterval(function () {
          goToNext.onclick();
-    },1500);
+    },2500);
 }
  autoShow();
 //点击某个圆点,跳转至相应的图片
 for(var i=0;i<buttons.length;i++){
     (function (i) {
-        buttons[i].onclick=function(){
+            addIndex();
+            buttons[i].onclick=function(){
             var clickIndex=parseInt(this.getAttribute('index'));
             var offset=-600*(clickIndex-index);
             animate(offset);
